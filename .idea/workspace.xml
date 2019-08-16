@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2b08031a-0d9a-4ab1-b0fb-b517bf1ca8c8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ball.py" beforeDir="false" afterPath="$PROJECT_DIR$/ball.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game.py" beforeDir="false" afterPath="$PROJECT_DIR$/game.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ball.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="205">
-              <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+              <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -56,7 +54,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bat.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="51">
@@ -187,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1565991885254</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Bastoes sendo ativados e &quot;mola funcionando&quot;">
+      <created>1565994367380</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1565994367380</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -225,29 +230,13 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Bastoes sendo ativados e &quot;mola funcionando&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bastoes sendo ativados e &quot;mola funcionando&quot;" />
+    <MESSAGE value="Bastoes sendo ativados e &quot;mola funcionando...&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bastoes sendo ativados e &quot;mola funcionando...&quot;" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/game" />
     <entry file="file://$PROJECT_DIR$/resource.py" />
     <entry file="file://$PROJECT_DIR$/rascunhoDoido" />
-    <entry file="file://$PROJECT_DIR$/pinball.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/functions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/objects.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -255,10 +244,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bat.py">
+    <entry file="file://$PROJECT_DIR$/pinball.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="30" />
+        <state relative-caret-position="57">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -275,7 +267,21 @@
     <entry file="file://$PROJECT_DIR$/ball.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="205">
-          <caret line="27" column="22" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="22" />
+          <caret line="27" column="26" lean-forward="true" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/functions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bat.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="30" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="30" />
         </state>
       </provider>
     </entry>

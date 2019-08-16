@@ -7,7 +7,11 @@ class Bat(pyglet.sprite.Sprite):
         super(Bat, self).__init__(*args, **kwargs)
         self.rotation = rot
 
-    #Funcão para rodar os bastoes, algo q NAO ESTA FUNCIONANDO
+    #Funcão para rodar os bastoes
     def click(self, rot):
-        self.rotation = rot
+        if self.rotation == 0:
+            self.rotation = rot
+
+        elif self.rotation == rot:
+            self.rotation = 0
 

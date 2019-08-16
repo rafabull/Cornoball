@@ -8,7 +8,7 @@ func = functions.Functions()
 #posições iniciais
 
 #Bola
-xB = 550
+xB = 550    #Se alterar, altere a class ball (update)
 yB = 47
 
 #Bastoes
@@ -43,6 +43,8 @@ class Game:
         aux = func.ancorar(pyglet.image.load('resources/images/barra.jpg'), 'dir')
         self.batD = bat.Bat(-30, aux, xD, yD)
 
+        self.molaK = 0
+        self.molaS = 'Go'
 
         self.status = 'PLAYING'
 
@@ -63,11 +65,27 @@ class Game:
         if self.ball.y < 0:
             self.status = 'GAME OVER'
 
-        self.ball.update(dt)
+        else:
+            self.atMola(self.molaS)
 
-    #chamando as funcoes para rotacionar os bastore oq NAO ESTA FUNCIONANDO
+            self.ball.update(dt)
+
+    #chamando as funcoes para rotacionar os bastoes
     def esq(self):
         self.batE.click(30)
 
     def dir(self):
         self.batD.click(-30)
+
+    def atMola(self, status):
+        if status == 'Press':
+            self.molaK += 40
+
+        elif status == 'Go':
+            if self.molaK != 0:
+                self.ball.interaction(x=None, y=self.molaK, sup=1)
+                print(self.molaK)
+            self.molaK = 0
+
+
+

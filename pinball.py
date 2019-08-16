@@ -31,5 +31,20 @@ def on_key_press(symbol, modifiers):
     elif symbol == key.RIGHT:
         game.dir()
 
+    elif symbol == key.SPACE:
+        game.molaS = 'Press'
+
+@window.event
+def on_key_release(symbol, modifiers):
+    if symbol == key.LEFT:
+        game.esq()
+
+    elif symbol == key.RIGHT:
+        game.dir()
+
+    elif symbol == key.SPACE:
+        game.molaS = 'Go'
+
+
 #iniciando a aplicacão
 pyglet.app.run()

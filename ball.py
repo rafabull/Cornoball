@@ -3,7 +3,9 @@ import pyglet
 
 class Ball(pyglet.sprite.Sprite):
     #definindo aceleracoes e velocidades da bola
+
     GRAVITY_ACC = -200
+
     at_ACC = - 100
     x_ACC = 0
     y_ACC = 0
@@ -32,3 +34,4 @@ class Ball(pyglet.sprite.Sprite):
             self.suport = sup
 
     #def handle_collision_with(self, other_object):
+

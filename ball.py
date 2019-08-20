@@ -12,26 +12,32 @@ class Ball(pyglet.sprite.Sprite):
     x_VEL = 0 #ainda n serve pra nd
     y_VEL = 0 #ainda n serve pra nd
 
-    suport = 0 #define se a variavel esta em um suporte 0 -> reto 1-> não esta
+    suportX = 0 #define se a variavel esta em um suporte 0 -> reto 1-> não esta
+    suportY = 0
 
     def __init__(self, *args, **kwargs):
         super(Ball, self).__init__(*args, **kwargs)
 
     #atualizando a posicao da bola
     def update(self, dt):
-        self.y_VEL = self.y_VEL + (self.GRAVITY_ACC*self.suport + self.y_ACC)*dt
-        self.y = self.y + self.y_VEL*dt
+        self.y_VEL = self.y_VEL + (self.GRAVITY_ACC * self.suportY + self.y_ACC)*dt
+        self.y = self.y + (self.y_VEL*dt)
 
-        self.x = self.x + self.x_VEL * dt
+        self.x_VEL = self.x_VEL + (self.x_ACC)*dt * self.suportX
+        self.x = self.x + (self.x_VEL * dt) * self.suportX
+
 
     #definindo funcao para alterar velocidades
-    def interaction(self, x, y, sup):
+    def interaction(self, x, y, supx, supy):
         if x != None:
             self.x_VEL = x
-        elif y != None:
+        if y != None:
             self.y_VEL = y
-        if sup != None:
-            self.suport = sup
+            print(self.y_VEL)
+        if supx != None:
+            self.suportX = supx
+        if supy != None:
+            self.suportY = supy
 
-    #def handle_collision_with(self, other_object):
-
+    def handle_collision_with(self, obj):
+        self.interaction(obj.interactX, obj.interactY, obj.suportingX, obj.suportingY)

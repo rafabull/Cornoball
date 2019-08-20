@@ -26,10 +26,10 @@ def on_draw():
 @window.event
 def on_key_press(symbol, modifiers):
     if symbol == key.LEFT:
-        game.esq()
+        game.batE.status = "PRESS"
 
     elif symbol == key.RIGHT:
-        game.dir()
+        game.batD.status = "PRESS"
 
     elif symbol == key.SPACE:
         game.molaS = 'Press'
@@ -37,10 +37,10 @@ def on_key_press(symbol, modifiers):
 @window.event
 def on_key_release(symbol, modifiers):
     if symbol == key.LEFT:
-        game.esq()
+        game.batE.status = "NORMAL"
 
     elif symbol == key.RIGHT:
-        game.dir()
+        game.batD.status = "NORMAL"
 
     elif symbol == key.SPACE:
         game.molaS = 'Go'

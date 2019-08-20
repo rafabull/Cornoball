@@ -7,11 +7,11 @@ class Functions:
     @staticmethod
     def ancorar(image, pos):
         if pos == 'dir':
-            image.anchor_y = image.height//2
+            image.anchor_y = image.height // 2
             image.anchor_x = image.width
 
         elif pos == 'esq':
-            image.anchor_y = image.height//2
+            image.anchor_y = image.height // 2
 
         elif pos == 'center':
             image.anchor_y = image.height // 2

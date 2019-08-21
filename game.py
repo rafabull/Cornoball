@@ -53,6 +53,7 @@ class Game:
 
         self.status = 'BEGINING'
 
+
     #desenhando na tela os elementos do jogo
     def draw(self):
         self.fundo.blit(0, 0)

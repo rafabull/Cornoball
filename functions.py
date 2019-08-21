@@ -18,3 +18,10 @@ class Functions:
             image.anchor_x = image.width // 2
 
         return image
+
+    @staticmethod
+    def sinal(num):
+        if num < 0:
+            return -1
+        if num >= 0:
+            return 1

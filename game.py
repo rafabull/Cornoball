@@ -53,6 +53,8 @@ class Game:
 
         self.status = 'BEGINING'
 
+        print(self.ball.bordas)
+
 
     #desenhando na tela os elementos do jogo
     def draw(self):
@@ -80,7 +82,7 @@ class Game:
                 self.batD.update(dt)
 
                 for obj in self.physicalObjects:
-                    self.collision(self.ball, obj)
+                    self.collision(obj)
 
                 self.ball.interaction(None, None, 1, 1)
 
@@ -100,8 +102,9 @@ class Game:
             self.status = "PLAYING"
 
 
-    def collision(self, obj1, obj2):
-        if obj1.x < obj2.x + obj2.width and obj1.x + obj1.width > obj2.x \
-                and obj1.y < obj2.y + obj2.height and obj1.height + obj1.y > obj2.y:
-            obj1.handle_collision_with(obj2)
-
+    def collision(self, obj1):
+        for b1 in obj1.bordas:
+            for b2 in self.ball.bordas:
+                if b1 == b2:
+                    print("bateu")
+                    self.ball.handle_collision_with(obj1)

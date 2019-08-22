@@ -1,5 +1,5 @@
 import pyglet
-
+import math
 
 class Ball(pyglet.sprite.Sprite):
     #definindo aceleracoes e velocidades da bola
@@ -17,6 +17,7 @@ class Ball(pyglet.sprite.Sprite):
 
     def __init__(self, *args, **kwargs):
         super(Ball, self).__init__(*args, **kwargs)
+        self.listaPixels()
 
     #atualizando a posicao da bola
     def update(self, dt):
@@ -26,6 +27,7 @@ class Ball(pyglet.sprite.Sprite):
         self.x_VEL = self.x_VEL + (self.x_ACC)*dt * self.suportX
         self.x = self.x + (self.x_VEL * dt) * self.suportX
 
+        self.listaPixels()
 
     #definindo funcao para alterar velocidades
     def interaction(self, x, y, supx, supy):
@@ -38,6 +40,16 @@ class Ball(pyglet.sprite.Sprite):
             self.suportX = supx
         if supy != None:
             self.suportY = supy
+
+    def listaPixels(self):
+        self.bordas = []
+        raio = self.width
+        for x in range(int(self.x-raio), int(self.x+raio)):
+            self.bordas.append((x, self.y+raio))
+            self.bordas.append((x, self.y-raio))
+            #const = x**2 - 2*self.x*x + self.x**2 + self.y**2 - raio**2
+            #self.bordas.append((x, 2*self.y + ((2*self.y)**2 - 4*self.x*const)**(1/2)))
+            #self.bordas.append((x, 2*self.y - ((2*self.y)**2 - 4*self.x*const)**(1/2)))
 
     def handle_collision_with(self, obj):
         self.interaction(obj.interactX, obj.interactY, obj.suportingX, obj.suportingY)

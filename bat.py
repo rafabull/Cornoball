@@ -49,6 +49,7 @@ class Bat(pyglet.sprite.Sprite):
                 self.listaPixels()
 
     def listaPixels(self):
+        self.bordas = []
         rot = self.rotation
         sentido = fc.sinal(rot)
         for i in range(self.x, (self.x + self.width * sentido + 1), sentido):

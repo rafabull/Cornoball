@@ -1,4 +1,5 @@
 import pyglet
+import pymunk
 from pyglet.gl import *
 import functions
 import ball
@@ -17,7 +18,12 @@ yE = 50
 xD = 400
 yD = 50
 
+
 class Game:
+    #defnindo variaveis do pymunk
+    space = pymunk.Space()
+    space.gravity = (0.0, -900.0)
+
     #definindo a taxa de atualisacão
     TIME_INTERVAL = 0.01
     time = 0
@@ -40,21 +46,22 @@ class Game:
     def __init__(self):
         self.ball = ball.Ball(pyglet.image.load_animation('resources/images/bola.gif'), xB, yB)
 
+        #Criando os bastoes
         aux = func.ancorar(pyglet.image.load('resources/images/barra.jpg'), 'esq')
-        self.batE = bat.Bat(30, 1, aux, xE, yE)
+        self.batE = bat.Bat(-1, aux, xE, yE)
+        self.space.add(self.batE.body, self.batE.shape) #adicionando os elementos a simulação fisica do pymunk
+        self.space.add(self.batE.j, self.batE.s)
         self.physicalObjects.append(self.batE)
 
         aux = func.ancorar(pyglet.image.load('resources/images/barra.jpg'), 'dir')
-        self.batD = bat.Bat(-30, -1, aux, xD, yD)
+        self.batD = bat.Bat(1, aux, xD, yD)
+        self.space.add(self.batD.body, self.batD.shape) #adicionando os elementos a simulação fisica do pymunk
+        self.space.add(self.batD.j, self.batD.s)
         self.physicalObjects.append(self.batD)
 
-        self.molaK = 0
-        self.molaS = 'St'
-
         self.status = 'BEGINING'
-
-        print(self.ball.bordas)
-
+        self.molaS = 'GO'
+        self.molaX = 0
 
     #desenhando na tela os elementos do jogo
     def draw(self):
@@ -71,6 +78,7 @@ class Game:
     def update(self, dt):
         dt = Game.TIME_INTERVAL
 
+        self.space.step(dt)
         if self.status == "PLAYING":
             if self.ball.y < 0:
                 self.status = 'GAME OVER'
@@ -81,10 +89,6 @@ class Game:
                 self.batE.update(dt)
                 self.batD.update(dt)
 
-                for obj in self.physicalObjects:
-                    self.collision(obj)
-
-                self.ball.interaction(None, None, 1, 1)
 
         elif self.status == "BEGINING":
             self.atMola(self.molaS)
@@ -92,19 +96,14 @@ class Game:
             self.batD.update(dt)
 
     def atMola(self, status):
-        if status == 'Press':
-            self.molaK += 40
+        if status == 'PRESS':
+            self.molaX += 40
 
-        elif status == 'Go':
-            if self.molaK != 0:
-                self.ball.interaction(None, self.molaK, None, 1)
-            self.molaK = 0
+        elif status == 'GO':
+            if self.molaX != 0:
+                impulsoBola = self.molaX
+                #chamar função para aplicar impulso na bolinha se ela estiver na posição inicial
+
+            self.molaX = 0
             self.status = "PLAYING"
 
-
-    def collision(self, obj1):
-        for b1 in obj1.bordas:
-            for b2 in self.ball.bordas:
-                if b1 == b2:
-                    print("bateu")
-                    self.ball.handle_collision_with(obj1)

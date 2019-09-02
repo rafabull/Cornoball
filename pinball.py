@@ -1,6 +1,8 @@
 import pyglet
 from pyglet.window import key
 from pyglet.gl import *
+import pymunk
+import pymunk.pyglet_util
 import game
 
 #Instanciando a classe game e janela
@@ -22,6 +24,9 @@ def on_draw():
 
     game.draw()
 
+    #exibindo na tela os elementos da fisica (pymunk)
+    game.space.debug_draw(pymunk.pyglet_util.DrawOptions())
+
 #funcao para detectar teclas pressionadas
 @window.event
 def on_key_press(symbol, modifiers):
@@ -32,7 +37,7 @@ def on_key_press(symbol, modifiers):
         game.batD.status = "PRESS"
 
     elif symbol == key.SPACE:
-        game.molaS = 'Press'
+        game.molaS = 'PRESS'
 
 @window.event
 def on_key_release(symbol, modifiers):
@@ -43,7 +48,7 @@ def on_key_release(symbol, modifiers):
         game.batD.status = "NORMAL"
 
     elif symbol == key.SPACE:
-        game.molaS = 'Go'
+        game.molaS = 'GO'
 
 
 #iniciando a aplicacão

@@ -1,58 +1,55 @@
 import pyglet
+import pymunk
 import math
+import numpy
 import functions
+from pymunk import Vec2d
+
 
 fc = functions.Functions()
 
 
 class Bat(pyglet.sprite.Sprite):
+    #definindo formato (triangular) e massa dos bastoes
+    forma = [(10, -10), (-70, -40), (10, 10)]
+    massa = 50
 
-    vel_bat = (1/4 * 29) #1/numero de dts necessarios para ativar ou desativar o bastao
-    impx = 200
-    impy = 300
-
-    def __init__(self, rot, it, *args, **kwargs):
+    def __init__(self, ori, *args, **kwargs):
         super(Bat, self).__init__(*args, **kwargs)
-        self.rotation = rot
-        self.bordas = []
-        self.listaPixels()
+        self.orientation = ori
 
-        self.suportingY = 0.86
-        self.suportingX = 0.5
-        self.interactX = it
-        self.interactY = 1
+        #criando o bastão se acordo com o lado que será posicionado
+        moment = pymunk.moment_for_poly(self.massa, self.forma)
+        self.body = pymunk.Body(self.massa, moment)
+        self.body.position = self.x, self.y
+        self.shape = pymunk.Poly(self.body, [(ori*x, y) for x, y in self.forma]) #o valor de ori torna o x positivo ou negativo
 
+        #criando o ponto em que o bastão é fixado
+        self.jointBody = pymunk.Body(body_type=pymunk.Body.KINEMATIC)
+        self.jointBody.position = self.body.position
+        self.j = pymunk.PinJoint(self.body, self.jointBody, (0, 0), (0, 0))
+        self.s = pymunk.DampedRotarySpring(self.body, self.jointBody, 0.15*ori, 20000000, 900000)
+
+        #atribuindo algumas caracteristcas ao bastão
+        self.shape.group = 1
+        self.shape.elasticity = 0.4
         self.status = "NORMAL"
 
-    #Funcão para rodar os bastoes
     def update(self, dt):
+        #atualiza o angulo da sprit
+        self.rotation = -30 * self.orientation - numpy.rad2deg(self.body.angle)
+
+        #aplica o impulso no bastão
         if self.status == "PRESS":
-            #ativando bastao esquerdo
-            if self.rotation > 1 and self.rotation <= 30:
-                self.rotation -= self.vel_bat
-                self.listaPixels()
+            self.body.apply_impulse_at_local_point(Vec2d.unit() * -500 * self.orientation,              #BUG: Cada bastão esta respodendo de uma forma ao impulso
+                                                   (self.x + self.width * self.orientation, self.y))    #       O bastão esquerdo esta mais doido
 
-            # ativando bastao direito
-            if self.rotation < -1 and self.rotation >= -30:
-                self.rotation += self.vel_bat
-                self.listaPixels()
 
-        else:
-            #desativando bastao esquerdo
-            if self.rotation > 0 and self.rotation < 30:
-                self.rotation += self.vel_bat
-                self.listaPixels()
-
-            # desativando bastao direito
-            if self.rotation < 0 and self.rotation > -30:
-                self.rotation -= self.vel_bat
-                self.listaPixels()
-
-    def listaPixels(self):
+    '''def listaPixels(self):
         self.bordas = []
         rot = self.rotation
         sentido = fc.sinal(rot)
         for i in range(self.x, (self.x + self.width * sentido + 1), sentido):
-            self.bordas.append((i, self.y+(i - self.x)*math.cos(rot)))
+            self.bordas.append((i, self.y+(i - self.x)*math.cos(rot)))'''
 
 

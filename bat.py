@@ -11,7 +11,7 @@ fc = functions.Functions()
 
 class Bat(pyglet.sprite.Sprite):
     #definindo formato (triangular) e massa dos bastoes
-    forma = [(10, -10), (-70, -40), (10, 10)]
+    forma = [(10, -10), (-60, -40), (10, 12)]
     massa = 50
 
     def __init__(self, ori, *args, **kwargs):
@@ -41,8 +41,7 @@ class Bat(pyglet.sprite.Sprite):
 
         #aplica o impulso no bastão
         if self.status == "PRESS":
-            self.body.apply_impulse_at_local_point(Vec2d.unit() * -500 * self.orientation,              #BUG: Cada bastão esta respodendo de uma forma ao impulso
-                                                   (self.x + self.width * self.orientation, self.y))    #       O bastão esquerdo esta mais doido
+            self.body.apply_impulse_at_local_point(Vec2d.unit() * -1800, (self.width * self.orientation, 0))
 
 
     '''def listaPixels(self):

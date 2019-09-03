@@ -18,7 +18,6 @@ yE = 50
 xD = 400
 yD = 50
 
-
 class Game:
     #defnindo variaveis do pymunk
     space = pymunk.Space()
@@ -42,6 +41,10 @@ class Game:
     #definindo array para objetos que podem colidir
     physicalObjects = []
 
+    # Bordas
+    borders = [pymunk.Segment(space.static_body, (548, 50), (570, 50), 1.0),
+               pymunk.Segment(space.static_body, (570, 50), (570, 400), 1.0)]
+
     #iniciando os elementos do jogo
     def __init__(self):
         self.ball = ball.Ball(pyglet.image.load_animation('resources/images/bola.gif'), xB, yB)
@@ -58,6 +61,11 @@ class Game:
         self.space.add(self.batD.body, self.batD.shape) #adicionando os elementos a simulação fisica do pymunk
         self.space.add(self.batD.j, self.batD.s)
         self.physicalObjects.append(self.batD)
+
+        for line in self.borders:
+            line.elasticity = 0.7
+            line.group = 1
+        self.space.add(self.borders)
 
         self.status = 'BEGINING'
         self.molaS = 'GO'

@@ -41,7 +41,7 @@ class Bat(pyglet.sprite.Sprite):
 
         #aplica o impulso no bastão
         if self.status == "PRESS":
-            self.body.apply_impulse_at_local_point(Vec2d.unit() * -1800, (self.width * self.orientation, 0))
+            self.body.apply_impulse_at_local_point(Vec2d.unit() * -3500, (self.width * self.orientation, 0))
 
 
     '''def listaPixels(self):

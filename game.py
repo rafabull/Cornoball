@@ -13,9 +13,9 @@ xB = 250
 yB = 500
 
 #Bastoes
-xE = 230
+xE = 205
 yE = 50
-xD = 400
+xD = 390
 yD = 50
 
 class Game:
@@ -42,8 +42,8 @@ class Game:
     physicalObjects = []
 
     # Bordas
-    borders = [pymunk.Segment(space.static_body, (548, 50), (570, 50), 1.0),
-               pymunk.Segment(space.static_body, (570, 50), (570, 400), 1.0)]
+    borders = [pymunk.Segment(space.static_body, (500, 45), (515, 45), 1.0),
+               pymunk.Segment(space.static_body, (515, 45), (515, 400), 1.0)]
 
     #iniciando os elementos do jogo
     def __init__(self):

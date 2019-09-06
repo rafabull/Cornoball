@@ -43,8 +43,33 @@ class Game:
     physicalObjects = []
 
     # Bordas
-    borders = [pymunk.Segment(space.static_body, (500, 45), (515, 45), 1.0),
-               pymunk.Segment(space.static_body, (515, 45), (515, 400), 1.0)]
+    borders = [pymunk.Segment(space.static_body, (497, 45), (515, 45), 1.0),  #tubo/dreita
+               pymunk.Segment(space.static_body, (515, 45), (515, 400), 1.0),
+
+               pymunk.Segment(space.static_body, (515, 400), (510, 500), 1.0),  #circulo/topo
+               pymunk.Segment(space.static_body, (510, 500), (505, 545), 1.0),
+               pymunk.Segment(space.static_body, (505, 545), (495, 570), 1.0),
+               pymunk.Segment(space.static_body, (495, 570), (480, 600), 1.0),
+               pymunk.Segment(space.static_body, (480, 600), (420, 660), 1.0),
+               pymunk.Segment(space.static_body, (420, 660), (350, 693), 1.0),
+               pymunk.Segment(space.static_body, (350, 693), (300, 697), 1.0),  #metade do
+               pymunk.Segment(space.static_body, (300, 697), (250, 693), 1.0),  #sem circulo
+               pymunk.Segment(space.static_body, (250, 693), (180, 660), 1.0),
+               pymunk.Segment(space.static_body, (180, 660), (120, 600), 1.0),
+               pymunk.Segment(space.static_body, (120, 600), (105, 570), 1.0),
+               pymunk.Segment(space.static_body, (105, 570), (95, 545), 1.0),
+               pymunk.Segment(space.static_body, (95, 545), (90, 500), 1.0),
+
+               pymunk.Segment(space.static_body, (90, 500), (100, 400), 1.0), #lado esquerdo
+               pymunk.Segment(space.static_body, (100, 400), (130, 200), 1.0),
+               pymunk.Segment(space.static_body, (130, 200), (190, 60), 1.0),
+
+               pymunk.Segment(space.static_body, (403, 60), (460, 200), 1.0), #lado direito
+               pymunk.Segment(space.static_body, (460, 200), (490, 400), 1.0),
+
+               pymunk.Segment(space.static_body, (490, 400), (497, 450), 1.0), #tubo lado esquerdo
+               pymunk.Segment(space.static_body, (497, 450), (497, 45), 1.0)
+               ]
 
     #iniciando os elementos do jogo
     def __init__(self):

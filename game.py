@@ -4,6 +4,7 @@ from pyglet.gl import *
 import functions
 import ball
 import bat
+import obstaculos
 
 func = functions.Functions()
 #posições iniciais
@@ -47,6 +48,21 @@ class Game:
 
     #iniciando os elementos do jogo
     def __init__(self):
+         #adicionando as formas(obstaculos)
+        self.Circulo_0 = obstaculos.Circulo(385,583, 39)
+        self.Circulo_1 = obstaculos.Circulo(257,302, 39)
+        self.space.add(self.Circulo_0.circulo, self.Circulo_1.circulo)
+
+        self.Triangulo1_0 = obstaculos.Triangulo1(270,444, 42)
+        self.Triangulo1_1 = obstaculos.Triangulo1(181,560, 42)
+        self.Triangulo1_2 = obstaculos.Triangulo1(413,385, 42)
+        self.space.add(self.Triangulo1_0.triangulo1,self.Triangulo1_1.triangulo1,self.Triangulo1_2.triangulo1)
+
+        self.Triangulo2_0 = obstaculos.Triangulo2(200,121, 40,90)
+        self.Triangulo2_1 = obstaculos.Triangulo2(395,121, -40,90)
+        self.space.add(self.Triangulo2_0.triangulo2, self.Triangulo2_1.triangulo2)
+
+
         self.ball = ball.Ball(pyglet.image.load_animation('resources/images/bola.gif'), xB, yB)
 
         #Criando os bastoes

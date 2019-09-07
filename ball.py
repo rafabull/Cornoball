@@ -2,9 +2,15 @@ import pyglet
 import math
 
 class Ball(pyglet.sprite.Sprite):
-    #definindo aceleracoes e velocidades da bola
 
-    GRAVITY_ACC = -200
+
+
+
+
+
+
+
+    '''GRAVITY_ACC = -1000
 
     at_ACC = - 100
     x_ACC = 0
@@ -24,7 +30,7 @@ class Ball(pyglet.sprite.Sprite):
         self.y = self.y + (self.y_VEL*dt)
 
         self.x_VEL = self.x_VEL + (self.x_ACC)*dt * self.suportX
-        self.x = self.x + (self.x_VEL * dt) * self.suportX
+        self.x = self.x + (self.x_VEL * dt) * self.suportX'''
 
 
     '''def listaPixels(self):

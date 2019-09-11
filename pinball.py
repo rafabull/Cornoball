@@ -50,6 +50,5 @@ def on_key_release(symbol, modifiers):
     elif symbol == key.SPACE:
         game.molaS = 'GO'
 
-
 #iniciando a aplicacão
 pyglet.app.run()

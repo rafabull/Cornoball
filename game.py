@@ -5,6 +5,7 @@ import functions
 import ball
 import bat
 import obstaculos
+from pymunk import pyglet_util
 
 func = functions.Functions()
 #posições iniciais
@@ -22,7 +23,7 @@ yD = 50
 class Game:
     #defnindo variaveis do pymunk
     space = pymunk.Space()
-    space.gravity = (0.0, -900.0)
+    space.gravity = (0.0, -500.0) # -500 é toop
 
     #definindo a taxa de atualisacão
     TIME_INTERVAL = 0.01
@@ -89,7 +90,7 @@ class Game:
 
         self.mass = 1
         self.radius = 10
-        self.ball = ball.Bola(self.mass, self.radius)
+        self.ball = ball.Bola(self.mass, self.radius, xB, yB)
         self.space.add(self.ball.circle_body, self.ball.circle_shape)
 
         #Criando os bastoes
@@ -131,14 +132,15 @@ class Game:
 
         self.space.step(dt)
         if self.status == "PLAYING":
-            '''if self.ball.y < 0:
+            if self.ball.y < 0:
                 self.status = 'GAME OVER'
-            else:'''
-            self.time += dt
+            else:
+                self.time += dt
 
-            #self.ball.update(dt)
-            self.batE.update(dt)
-            self.batD.update(dt)
+                self.ball.update(dt)
+
+                self.batE.update(dt)
+                self.batD.update(dt)
 
 
         elif self.status == "BEGINING":

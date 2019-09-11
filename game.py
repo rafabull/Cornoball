@@ -87,8 +87,10 @@ class Game:
         self.Triangulo2_1 = obstaculos.Triangulo2(395,121, -40,90)
         self.space.add(self.Triangulo2_0.triangulo2, self.Triangulo2_1.triangulo2)
 
-
-        self.ball = ball.Ball(pyglet.image.load_animation('resources/images/bola.gif'), xB, yB)
+        self.mass = 1
+        self.radius = 10
+        self.ball = ball.Bola(self.mass, self.radius)
+        self.space.add(self.ball.circle_body, self.ball.circle_shape)
 
         #Criando os bastoes
         aux = func.ancorar(pyglet.image.load('resources/images/barra.jpg'), 'esq')
@@ -119,7 +121,7 @@ class Game:
             self.gameOver.draw()
 
         elif self.status == 'PLAYING' or self.status == 'BEGINING':
-            self.ball.draw()
+            #self.ball.draw()
             for obj in self.physicalObjects:
                 obj.draw()
 
@@ -129,14 +131,14 @@ class Game:
 
         self.space.step(dt)
         if self.status == "PLAYING":
-            if self.ball.y < 0:
+            '''if self.ball.y < 0:
                 self.status = 'GAME OVER'
-            else:
-                self.time += dt
+            else:'''
+            self.time += dt
 
-                self.ball.update(dt)
-                self.batE.update(dt)
-                self.batD.update(dt)
+            #self.ball.update(dt)
+            self.batE.update(dt)
+            self.batD.update(dt)
 
 
         elif self.status == "BEGINING":

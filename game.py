@@ -94,13 +94,13 @@ class Game:
         self.space.add(self.ball.circle_body, self.ball.circle_shape)
 
         #Criando os bastoes
-        aux = func.ancorar(pyglet.image.load('resources/images/barra.jpg'), 'esq')
+        aux = func.ancorar(pyglet.image.load('resources/images/bastao1.png'), 'esq')
         self.batE = bat.Bat(-1, aux, xE, yE)
         self.space.add(self.batE.body, self.batE.shape) #adicionando os elementos a simulação fisica do pymunk
         self.space.add(self.batE.j, self.batE.s)
         self.physicalObjects.append(self.batE)
 
-        aux = func.ancorar(pyglet.image.load('resources/images/barra.jpg'), 'dir')
+        aux = func.ancorar(pyglet.image.load('resources/images/bastao-1.png'), 'dir')
         self.batD = bat.Bat(1, aux, xD, yD)
         self.space.add(self.batD.body, self.batD.shape) #adicionando os elementos a simulação fisica do pymunk
         self.space.add(self.batD.j, self.batD.s)

@@ -23,7 +23,7 @@ yD = 50
 class Game:
     #defnindo variaveis do pymunk
     space = pymunk.Space()
-    space.gravity = (0.0, -500.0) # -500 é toop
+    space.gravity = (0.0, -500) # -500 é toop
 
     #definindo a taxa de atualisacão
     TIME_INTERVAL = 0.01
@@ -54,7 +54,7 @@ class Game:
                pymunk.Segment(space.static_body, (480, 600), (420, 660), 1.0),
                pymunk.Segment(space.static_body, (420, 660), (350, 693), 1.0),
                pymunk.Segment(space.static_body, (350, 693), (300, 697), 1.0),  #metade do
-               pymunk.Segment(space.static_body, (300, 697), (250, 693), 1.0),  #sem circulo
+               pymunk.Segment(space.static_body, (300, 697), (250, 693), 1.0),  #semi circulo
                pymunk.Segment(space.static_body, (250, 693), (180, 660), 1.0),
                pymunk.Segment(space.static_body, (180, 660), (120, 600), 1.0),
                pymunk.Segment(space.static_body, (120, 600), (105, 570), 1.0),
@@ -63,9 +63,9 @@ class Game:
 
                pymunk.Segment(space.static_body, (90, 500), (100, 400), 1.0), #lado esquerdo
                pymunk.Segment(space.static_body, (100, 400), (130, 200), 1.0),
-               pymunk.Segment(space.static_body, (130, 200), (190, 60), 1.0),
+               pymunk.Segment(space.static_body, (130, 200), (195, 55), 1.0),
 
-               pymunk.Segment(space.static_body, (403, 60), (460, 200), 1.0), #lado direito
+               pymunk.Segment(space.static_body, (400, 55), (460, 200), 1.0), #lado direito
                pymunk.Segment(space.static_body, (460, 200), (490, 400), 1.0),
 
                pymunk.Segment(space.static_body, (490, 400), (497, 450), 1.0), #tubo lado esquerdo

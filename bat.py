@@ -11,7 +11,7 @@ fc = functions.Functions()
 
 class Bat(pyglet.sprite.Sprite):
     #definindo formato (triangular) e massa dos bastoes
-    forma = [(10, -10), (-60, -40), (10, 12)]
+    forma = [(5, -5), (-50, -33), (0, 12)]
     massa = 80
 
     def __init__(self, ori, *args, **kwargs):
@@ -27,7 +27,7 @@ class Bat(pyglet.sprite.Sprite):
         #criando o ponto em que o bastão é fixado
         self.jointBody = pymunk.Body(body_type=pymunk.Body.KINEMATIC)
         self.jointBody.position = self.body.position
-        self.j = pymunk.PinJoint(self.body, self.jointBody, (0, 0), (0, 0))
+        self.j = pymunk.PivotJoint(self.body, self.jointBody, (0, 0), (0, 0))
         self.s = pymunk.DampedRotarySpring(self.body, self.jointBody, 0.15*ori, 20000000, 900000)
 
         #atribuindo algumas caracteristcas ao bastão
@@ -37,7 +37,7 @@ class Bat(pyglet.sprite.Sprite):
 
     def update(self, dt):
         #atualiza o angulo da sprit
-        self.rotation = -30 * self.orientation - numpy.rad2deg(self.body.angle)
+        self.rotation = -30 * self.orientation - (numpy.rad2deg(self.body.angle) * 0.9)
 
         #aplica o impulso no bastão
         if self.status == "PRESS":

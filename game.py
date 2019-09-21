@@ -11,14 +11,14 @@ func = functions.Functions()
 #posições iniciais
 
 #Bola
-xB = 250
-yB = 500
+xB = 250    #505
+yB = 500     #55
 
 #Bastoes
-xE = 205
-yE = 50
-xD = 390
-yD = 50
+xE = 200
+yE = 40
+xD = 395
+yD = 40
 
 class Game:
     #defnindo variaveis do pymunk
@@ -44,7 +44,7 @@ class Game:
     physicalObjects = []
 
     # Bordas
-    borders = [pymunk.Segment(space.static_body, (497, 45), (515, 45), 1.0),  #tubo/dreita
+    borders = [pymunk.Segment(space.static_body, (495, 45), (515, 45), 1.0),  #tubo/dreita
                pymunk.Segment(space.static_body, (515, 45), (515, 400), 1.0),
 
                pymunk.Segment(space.static_body, (515, 400), (510, 500), 1.0),  #circulo/topo
@@ -61,15 +61,19 @@ class Game:
                pymunk.Segment(space.static_body, (105, 570), (95, 545), 1.0),
                pymunk.Segment(space.static_body, (95, 545), (90, 500), 1.0),
 
-               pymunk.Segment(space.static_body, (90, 500), (100, 400), 1.0), #lado esquerdo
+               pymunk.Segment(space.static_body, (90, 500), (100, 400), 1.0),  #lado esquerdo
                pymunk.Segment(space.static_body, (100, 400), (130, 200), 1.0),
                pymunk.Segment(space.static_body, (130, 200), (195, 55), 1.0),
 
-               pymunk.Segment(space.static_body, (400, 55), (460, 200), 1.0), #lado direito
-               pymunk.Segment(space.static_body, (460, 200), (490, 400), 1.0),
+               pymunk.Segment(space.static_body, (400, 55), (460, 200), 1.0),  #lado direito
+               pymunk.Segment(space.static_body, (460, 200), (495, 400), 1.0),
 
-               pymunk.Segment(space.static_body, (490, 400), (497, 450), 1.0), #tubo lado esquerdo
-               pymunk.Segment(space.static_body, (497, 450), (497, 45), 1.0)
+               # pymunk.Segment(space.static_body, (500, 400), (490, 450), 1.0), #tubo lado esquerdo
+               pymunk.Segment(space.static_body, (495, 400), (495, 45), 1.0),
+               pymunk.Segment(space.static_body, (495, 400), (490, 500), 1.0),
+               pymunk.Segment(space.static_body, (490, 500), (485, 540), 1.0),
+               pymunk.Segment(space.static_body, (485, 540), (475, 565), 1.0),
+               pymunk.Segment(space.static_body, (475, 565), (460, 590), 1.0)
                ]
 
     #iniciando os elementos do jogo
@@ -79,18 +83,20 @@ class Game:
         self.Circulo_1 = obstaculos.Circulo(257,302, 39)
         self.space.add(self.Circulo_0.circulo, self.Circulo_1.circulo)
 
-        self.Triangulo1_0 = obstaculos.Triangulo1(270,444, 42)
-        self.Triangulo1_1 = obstaculos.Triangulo1(181,560, 42)
-        self.Triangulo1_2 = obstaculos.Triangulo1(413,385, 42)
-        self.space.add(self.Triangulo1_0.triangulo1,self.Triangulo1_1.triangulo1,self.Triangulo1_2.triangulo1)
+        self.Triangulo1_0 = obstaculos.Triangulo1(270, 444, 42)
+        self.Triangulo1_1 = obstaculos.Triangulo1(181, 560, 42)
+        self.Triangulo1_2 = obstaculos.Triangulo1(413, 385, 42)
+        self.space.add(self.Triangulo1_0.triangulo1, self.Triangulo1_1.triangulo1, self.Triangulo1_2.triangulo1)
 
-        self.Triangulo2_0 = obstaculos.Triangulo2(200,121, 40,90)
-        self.Triangulo2_1 = obstaculos.Triangulo2(395,121, -40,90)
+        self.Triangulo2_0 = obstaculos.Triangulo2(200, 121, 40, 90)
+        self.Triangulo2_1 = obstaculos.Triangulo2(395, 121, -40, 90)
         self.space.add(self.Triangulo2_0.triangulo2, self.Triangulo2_1.triangulo2)
 
+        #Criando a bola
         self.mass = 1
         self.radius = 10
-        self.ball = ball.Bola(self.mass, self.radius, xB, yB)
+        aux = func.ancorar(pyglet.image.load('resources/images/bola.png'), 'center')
+        self.ball = ball.Bola(self.mass, self.radius, xB, yB, aux)
         self.space.add(self.ball.circle_body, self.ball.circle_shape)
 
         #Criando os bastoes
@@ -115,6 +121,13 @@ class Game:
         self.molaS = 'GO'
         self.molaX = 0
 
+    def reset(self):
+        self.space.remove(self.ball.circle_body, self.ball.circle_shape)
+        aux = func.ancorar(pyglet.image.load('resources/images/bola.png'), 'center')
+        self.ball = ball.Bola(self.mass, self.radius, xB, yB, aux)
+        self.space.add(self.ball.circle_body, self.ball.circle_shape)
+        self.status = "PLAYING"
+
     #desenhando na tela os elementos do jogo
     def draw(self):
         self.fundo.blit(0, 0)
@@ -122,7 +135,7 @@ class Game:
             self.gameOver.draw()
 
         elif self.status == 'PLAYING' or self.status == 'BEGINING':
-            #self.ball.draw()
+            self.ball.draw()
             for obj in self.physicalObjects:
                 obj.draw()
 

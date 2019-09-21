@@ -39,6 +39,10 @@ def on_key_press(symbol, modifiers):
     elif symbol == key.SPACE:
         game.molaS = 'PRESS'
 
+    if game.status == "GAME OVER":
+        game.reset()
+        print("resetar")
+
 @window.event
 def on_key_release(symbol, modifiers):
     if symbol == key.LEFT:
@@ -49,6 +53,7 @@ def on_key_release(symbol, modifiers):
 
     elif symbol == key.SPACE:
         game.molaS = 'GO'
+
 
 #iniciando a aplicacão
 pyglet.app.run()

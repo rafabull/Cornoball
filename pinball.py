@@ -40,8 +40,8 @@ def on_key_press(symbol, modifiers):
         game.molaS = 'PRESS'
 
     if game.status == "GAME OVER":
-        game.reset()
-        print("resetar")
+        if symbol == key.ENTER:
+            game.reset()
 
 @window.event
 def on_key_release(symbol, modifiers):

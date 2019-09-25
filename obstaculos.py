@@ -28,3 +28,17 @@ class Triangulo2:
         self.triangulo2.color = (255, 0, 0, 255)
         self.triangulo2.elasticity = 0.98
         self.triangulo2.friction = 0.6
+
+class Trigira:
+    def __init__(self, x, y, l):
+        self.trigira = pymunk.Poly(None, ((-l*math.sqrt(3)/3, 0),(l*math.sqrt(3)/6,-l/2),(l*math.sqrt(3)/6,l/2)))
+        self.trigira_moment = pymunk.moment_for_poly(10,self.trigira.get_vertices())
+        self.trigira_body = pymunk.Body(10 ,self.trigira_moment, pymunk.Body.DYNAMIC)
+        self.trigira.body = self.trigira_body
+        self.trigira_body.position = x, y
+        self.trigira.color = (255, 0, 0, 255)
+        self.trigira.elasticity = 0.5
+        self.trigira.friction = 0.6
+        self.pino = pymunk.Body(body_type= pymunk.Body.STATIC)
+        self.pino.position = self.trigira_body.position
+        self.j = pymunk.PivotJoint(self.pino, self.trigira_body, (0,0), (0,0))

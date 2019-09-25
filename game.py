@@ -92,6 +92,16 @@ class Game:
         self.Triangulo2_1 = obstaculos.Triangulo2(395, 121, -40, 90)
         self.space.add(self.Triangulo2_0.triangulo2, self.Triangulo2_1.triangulo2)
 
+        self.Trigira_0 =  obstaculos.Trigira(150, 300, 30)
+        self.Trigira_1 =  obstaculos.Trigira(190, 360, 30)
+        self.Trigira_2 =  obstaculos.Trigira(160, 400, 30)
+        self.Trigira_3 =  obstaculos.Trigira(140, 450, 30)
+        self.space.add(self.Trigira_0.trigira, self.Trigira_0.trigira_body,
+                       self.Trigira_1.trigira, self.Trigira_1.trigira_body,
+                       self.Trigira_2.trigira, self.Trigira_2.trigira_body,
+                       self.Trigira_3.trigira, self.Trigira_3.trigira_body)
+        self.space.add(self.Trigira_0.j, self.Trigira_1.j, self.Trigira_2.j, self.Trigira_3.j)
+
         #Criando a bola
         self.mass = 1
         self.radius = 10

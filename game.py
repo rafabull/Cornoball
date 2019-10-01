@@ -106,6 +106,8 @@ class Game:
         #Criando a bola
         self.mass = 1
         self.radius = 10
+        self.game_start_time = 0
+        self.game_end_time = 0
         aux = func.ancorar(pyglet.image.load('resources/images/bola.png'), 'center')
         self.ball = ball.Bola(self.mass, self.radius, xB, yB, aux)
         self.space.add(self.ball.circle_body, self.ball.circle_shape)
@@ -138,6 +140,9 @@ class Game:
         self.ball = ball.Bola(self.mass, self.radius, xB, yB, aux)
         self.space.add(self.ball.circle_body, self.ball.circle_shape)
         self.status = "PLAYING"
+
+    def time_count(self):
+        print(self.game_end_time - self.game_start_time)
 
     #desenhando na tela os elementos do jogo
     def draw(self):

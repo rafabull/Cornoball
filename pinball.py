@@ -4,6 +4,7 @@ from pyglet.gl import *
 import pymunk
 import pymunk.pyglet_util
 import game
+import ball
 
 #Instanciando a classe game e janela
 game = game.Game()
@@ -37,7 +38,7 @@ def on_key_press(symbol, modifiers):
         game.batD.status = "PRESS"
 
     elif symbol == key.SPACE:
-        start_time = game.time
+        game.game_start_time = game.time
         game.molaS = 'PRESS'
 
     if game.status == "GAME OVER":
@@ -53,7 +54,8 @@ def on_key_release(symbol, modifiers):
         game.batD.status = "NORMAL"
 
     elif symbol == key.SPACE:
-        end_time = game.time
+        game.game_end_time = game.time
+        game.time_count()
         game.molaS = 'GO'
 
 

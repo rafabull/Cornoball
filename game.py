@@ -5,6 +5,7 @@ import functions
 import ball
 import bat
 import obstaculos
+import impulse
 from pyglet import clock
 from pymunk import pyglet_util
 
@@ -142,7 +143,11 @@ class Game:
         self.status = "PLAYING"
 
     def time_count(self):
-        print(self.game_end_time - self.game_start_time)
+        self.charge_time = self.game_end_time - self.game_start_time
+        if self.charge_time > 3:
+            self.charge_time = 3
+        print(self.charge_time)
+        #ball.Bola.circle_body.velocity = (self.charge_time, 0)
 
     #desenhando na tela os elementos do jogo
     def draw(self):

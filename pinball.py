@@ -56,6 +56,8 @@ def on_key_release(symbol, modifiers):
     elif symbol == key.SPACE:
         game.game_end_time = game.time
         game.time_count()
+        # print(ball.Bola.lin_vel)
+        # print(ball.Bola.ang_vel)
         game.molaS = 'GO'
 
 

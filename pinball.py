@@ -37,6 +37,7 @@ def on_key_press(symbol, modifiers):
         game.batD.status = "PRESS"
 
     elif symbol == key.SPACE:
+        start_time = game.time
         game.molaS = 'PRESS'
 
     if game.status == "GAME OVER":
@@ -52,6 +53,7 @@ def on_key_release(symbol, modifiers):
         game.batD.status = "NORMAL"
 
     elif symbol == key.SPACE:
+        end_time = game.time
         game.molaS = 'GO'
 
 

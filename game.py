@@ -5,14 +5,15 @@ import functions
 import ball
 import bat
 import obstaculos
+from pyglet import clock
 from pymunk import pyglet_util
 
 func = functions.Functions()
 #posições iniciais
 
 #Bola
-xB = 250    #505
-yB = 500     #55
+xB = 505
+yB = 100
 
 #Bastoes
 xE = 200
@@ -178,7 +179,7 @@ class Game:
         elif status == 'GO':
             if self.molaX != 0:
                 impulsoBola = self.molaX
-                #chamar função para aplicar impulso na bolinha se ela estiver na posição inicial
+
 
             self.molaX = 0
             self.status = "PLAYING"

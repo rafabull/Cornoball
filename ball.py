@@ -15,6 +15,7 @@ class Bola(pyglet.sprite.Sprite):
         self.circle_shape = pymunk.Circle(self.circle_body, radius)
         self.circle_shape.elasticity = 0.9
         self.circle_shape.friction = 0.9
+        self.circle_body.velocity = (0, 1200)
 
 
     # atualizando a posicao da bola

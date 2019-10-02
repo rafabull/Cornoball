@@ -106,7 +106,7 @@ class Game:
 
         #Criando a bola
         self.mass = 1
-        self.radius = 10
+        self.radius = 9.6
         self.game_start_time = 0
         self.game_end_time = 0
         aux = func.ancorar(pyglet.image.load('resources/images/bola.png'), 'center')
@@ -147,7 +147,6 @@ class Game:
         if self.charge_time > 3:
             self.charge_time = 3
         print(self.charge_time)
-        #ball.Bola.circle_body.velocity = (self.charge_time, 0)
 
     #desenhando na tela os elementos do jogo
     def draw(self):

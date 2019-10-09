@@ -11,14 +11,20 @@ func = functions.Functions()
 #posições iniciais
 
 #Bola
-xB = 250    #505
-yB = 500     #55
+xB = 505    #505
+yB = 55     #55
 
 #Bastoes
 xE = 220
 yE = 50
 xD = 375
 yD = 50
+
+collision_types = {
+    "ball": 1,
+    "mola": 2,
+    "Parede": 3
+}
 
 class Game:
     #defnindo variaveis do pymunk
@@ -68,14 +74,15 @@ class Game:
                pymunk.Segment(space.static_body, (380, 60), (460, 200), 1.0),  #lado direito
                pymunk.Segment(space.static_body, (460, 200), (495, 400), 1.0),
 
-               # pymunk.Segment(space.static_body, (500, 400), (490, 450), 1.0), #tubo lado esquerdo
-               pymunk.Segment(space.static_body, (495, 400), (495, 45), 1.0),
+               pymunk.Segment(space.static_body, (495, 400), (495, 45), 1.0),   #tubo lado esquerdo
                pymunk.Segment(space.static_body, (495, 400), (490, 500), 1.0),
                pymunk.Segment(space.static_body, (490, 500), (485, 540), 1.0),
                pymunk.Segment(space.static_body, (485, 540), (475, 565), 1.0),
                pymunk.Segment(space.static_body, (475, 565), (460, 590), 1.0)
                ]
     removiveis = []
+
+
     #iniciando os elementos do jogo
     def __init__(self):
          #adicionando as formas(obstaculos)
@@ -107,14 +114,28 @@ class Game:
         self.space.add(self.batD.j, self.batD.s)
         self.physicalObjects.append(self.batD)
 
+        first = 0
         for line in self.borders:
             line.elasticity = 0.7
             line.group = 1
+            if first == 0:
+                line.collision_type = collision_types["mola"]
+                first += 1
+                line.elasticity = 0
+            else:
+                line.collision_type = collision_types["Parede"]
         self.space.add(self.borders)
 
         self.status = 'BEGINING'
-        self.molaS = 'GO'
-        self.molaX = 0
+
+        h = self.space.add_collision_handler(
+            collision_types["mola"],
+            collision_types["ball"])
+        h.separate = self.iniciando
+
+
+    def iniciando(self, arbiter, space, data):
+        self.status = 'BEGINING'
 
     def Criaremov (self):
         self.Trigira_0 = obstaculos.Trigira(150, 300, 30)
@@ -130,9 +151,9 @@ class Game:
 
         # Criando a bola
         self.mass = 1
-        self.radius = 10
+        self.radius = 9
         aux = func.ancorar(pyglet.image.load('resources/images/bola.png'), 'center')
-        self.ball = ball.Bola(self.mass, self.radius, xB, yB, aux)
+        self.ball = ball.Bola(self.mass, self.radius, xB, yB, collision_types, aux)
         self.space.add(self.ball.circle_body, self.ball.circle_shape)
         self.removiveis = [self.Trigira_0.trigira, self.Trigira_0.trigira_body,
                        self.Trigira_1.trigira, self.Trigira_1.trigira_body,
@@ -142,11 +163,20 @@ class Game:
                        self.ball.circle_body, self.ball.circle_shape]
 
     def reset(self):
-
         self.space.remove(self.removiveis)
         self.Criaremov()
 
-        self.status = "PLAYING"
+        self.status = "BEGINING"
+
+    def time_count(self):
+        if self.status == 'BEGINING':
+            self.charge_time = self.game_end_time - self.game_start_time
+            if self.charge_time > 1:
+                self.charge_time = 1
+            self.ball.go(self.charge_time)
+            print("play")
+            self.status = "PLAYNG"
+            print(self.status)
 
     #desenhando na tela os elementos do jogo
     def draw(self):
@@ -164,7 +194,7 @@ class Game:
         dt = Game.TIME_INTERVAL
 
         self.space.step(dt)
-        if self.status == "PLAYING":
+        if self.status == "PLAYING" or self.status == "BEGINING":
             if self.ball.y < 0:
                 self.status = 'GAME OVER'
             else:
@@ -177,19 +207,8 @@ class Game:
 
 
         elif self.status == "BEGINING":
-            self.atMola(self.molaS)
             self.batE.update(dt)
             self.batD.update(dt)
 
-    def atMola(self, status):
-        if status == 'PRESS':
-            self.molaX += 40
 
-        elif status == 'GO':
-            if self.molaX != 0:
-                impulsoBola = self.molaX
-                #chamar função para aplicar impulso na bolinha se ela estiver na posição inicial
-
-            self.molaX = 0
-            self.status = "PLAYING"
 

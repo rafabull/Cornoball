@@ -39,7 +39,6 @@ def on_key_press(symbol, modifiers):
 
     elif symbol == key.SPACE:
         game.game_start_time = game.time
-        game.molaS = 'PRESS'
 
     if game.status == "GAME OVER":
         if symbol == key.ENTER:
@@ -56,9 +55,6 @@ def on_key_release(symbol, modifiers):
     elif symbol == key.SPACE:
         game.game_end_time = game.time
         game.time_count()
-        # print(ball.Bola.lin_vel)
-        # print(ball.Bola.ang_vel)
-        game.molaS = 'GO'
 
 
 #iniciando a aplicacão

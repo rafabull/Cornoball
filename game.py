@@ -5,22 +5,20 @@ import functions
 import ball
 import bat
 import obstaculos
-import impulse
-from pyglet import clock
 from pymunk import pyglet_util
 
 func = functions.Functions()
 #posições iniciais
 
 #Bola
-xB = 505
-yB = 100
+xB = 250    #505
+yB = 500     #55
 
 #Bastoes
-xE = 200
-yE = 40
-xD = 395
-yD = 40
+xE = 220
+yE = 50
+xD = 375
+yD = 50
 
 class Game:
     #defnindo variaveis do pymunk
@@ -32,7 +30,7 @@ class Game:
     time = 0
 
     #definindo o fundo e caracteristicas da janela
-    fundo = pyglet.resource.image('resources/images/fundo.png')
+    fundo = pyglet.resource.image('resources/images/Arte fundo - baixo.png')
 
     windowWidth = fundo.width
     windowHeight = fundo.height
@@ -65,9 +63,9 @@ class Game:
 
                pymunk.Segment(space.static_body, (90, 500), (100, 400), 1.0),  #lado esquerdo
                pymunk.Segment(space.static_body, (100, 400), (130, 200), 1.0),
-               pymunk.Segment(space.static_body, (130, 200), (195, 55), 1.0),
+               pymunk.Segment(space.static_body, (130, 200), (212, 60), 1.0),
 
-               pymunk.Segment(space.static_body, (400, 55), (460, 200), 1.0),  #lado direito
+               pymunk.Segment(space.static_body, (380, 60), (460, 200), 1.0),  #lado direito
                pymunk.Segment(space.static_body, (460, 200), (495, 400), 1.0),
 
                # pymunk.Segment(space.static_body, (500, 400), (490, 450), 1.0), #tubo lado esquerdo
@@ -77,7 +75,7 @@ class Game:
                pymunk.Segment(space.static_body, (485, 540), (475, 565), 1.0),
                pymunk.Segment(space.static_body, (475, 565), (460, 590), 1.0)
                ]
-
+    removiveis = []
     #iniciando os elementos do jogo
     def __init__(self):
          #adicionando as formas(obstaculos)
@@ -90,28 +88,11 @@ class Game:
         self.Triangulo1_2 = obstaculos.Triangulo1(413, 385, 42)
         self.space.add(self.Triangulo1_0.triangulo1, self.Triangulo1_1.triangulo1, self.Triangulo1_2.triangulo1)
 
-        self.Triangulo2_0 = obstaculos.Triangulo2(200, 121, 40, 90)
-        self.Triangulo2_1 = obstaculos.Triangulo2(395, 121, -40, 90)
+        self.Triangulo2_0 = obstaculos.Triangulo2(210, 121, 40, 90, -40)
+        self.Triangulo2_1 = obstaculos.Triangulo2(385, 121, -40, 90, 40)
         self.space.add(self.Triangulo2_0.triangulo2, self.Triangulo2_1.triangulo2)
 
-        self.Trigira_0 =  obstaculos.Trigira(150, 300, 30)
-        self.Trigira_1 =  obstaculos.Trigira(190, 360, 30)
-        self.Trigira_2 =  obstaculos.Trigira(160, 400, 30)
-        self.Trigira_3 =  obstaculos.Trigira(140, 450, 30)
-        self.space.add(self.Trigira_0.trigira, self.Trigira_0.trigira_body,
-                       self.Trigira_1.trigira, self.Trigira_1.trigira_body,
-                       self.Trigira_2.trigira, self.Trigira_2.trigira_body,
-                       self.Trigira_3.trigira, self.Trigira_3.trigira_body)
-        self.space.add(self.Trigira_0.j, self.Trigira_1.j, self.Trigira_2.j, self.Trigira_3.j)
-
-        #Criando a bola
-        self.mass = 1
-        self.radius = 9.6
-        self.game_start_time = 0
-        self.game_end_time = 0
-        aux = func.ancorar(pyglet.image.load('resources/images/bola.png'), 'center')
-        self.ball = ball.Bola(self.mass, self.radius, xB, yB, aux)
-        self.space.add(self.ball.circle_body, self.ball.circle_shape)
+        self.Criaremov()
 
         #Criando os bastoes
         aux = func.ancorar(pyglet.image.load('resources/images/bastao1.png'), 'esq')
@@ -135,18 +116,37 @@ class Game:
         self.molaS = 'GO'
         self.molaX = 0
 
-    def reset(self):
-        self.space.remove(self.ball.circle_body, self.ball.circle_shape)
+    def Criaremov (self):
+        self.Trigira_0 = obstaculos.Trigira(150, 300, 30)
+        self.Trigira_1 = obstaculos.Trigira(190, 360, 30)
+        self.Trigira_2 = obstaculos.Trigira(160, 400, 30)
+        self.Trigira_3 = obstaculos.Trigira(140, 450, 30)
+        self.space.add(self.Trigira_0.trigira, self.Trigira_0.trigira_body,
+                       self.Trigira_1.trigira, self.Trigira_1.trigira_body,
+                       self.Trigira_2.trigira, self.Trigira_2.trigira_body,
+                       self.Trigira_3.trigira, self.Trigira_3.trigira_body)
+
+        self.space.add(self.Trigira_0.j, self.Trigira_1.j, self.Trigira_2.j, self.Trigira_3.j)
+
+        # Criando a bola
+        self.mass = 1
+        self.radius = 10
         aux = func.ancorar(pyglet.image.load('resources/images/bola.png'), 'center')
         self.ball = ball.Bola(self.mass, self.radius, xB, yB, aux)
         self.space.add(self.ball.circle_body, self.ball.circle_shape)
-        self.status = "PLAYING"
+        self.removiveis = [self.Trigira_0.trigira, self.Trigira_0.trigira_body,
+                       self.Trigira_1.trigira, self.Trigira_1.trigira_body,
+                       self.Trigira_2.trigira, self.Trigira_2.trigira_body,
+                       self.Trigira_3.trigira, self.Trigira_3.trigira_body,
+                       self.Trigira_0.j, self.Trigira_1.j, self.Trigira_2.j, self.Trigira_3.j,
+                       self.ball.circle_body, self.ball.circle_shape]
 
-    def time_count(self):
-        self.charge_time = self.game_end_time - self.game_start_time
-        if self.charge_time > 3:
-            self.charge_time = 3
-        print(self.charge_time)
+    def reset(self):
+
+        self.space.remove(self.removiveis)
+        self.Criaremov()
+
+        self.status = "PLAYING"
 
     #desenhando na tela os elementos do jogo
     def draw(self):
@@ -188,7 +188,7 @@ class Game:
         elif status == 'GO':
             if self.molaX != 0:
                 impulsoBola = self.molaX
-
+                #chamar função para aplicar impulso na bolinha se ela estiver na posição inicial
 
             self.molaX = 0
             self.status = "PLAYING"

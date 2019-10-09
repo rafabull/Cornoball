@@ -21,9 +21,9 @@ class Triangulo1:
         self.triangulo1.friction = 0.6
 
 class Triangulo2:
-    def __init__(self, x, y, b, h):
+    def __init__(self, x, y, b, h, rot):
         self.triangulo2_body = pymunk.Body(body_type=pymunk.Body.STATIC)
-        self.triangulo2 = pymunk.Poly(self.triangulo2_body, ((0,0),(b,0),(0,h)))
+        self.triangulo2 = pymunk.Poly(self.triangulo2_body, ((0, 10),(b,0),(rot,h)))
         self.triangulo2.body.position = x,y
         self.triangulo2.color = (255, 0, 0, 255)
         self.triangulo2.elasticity = 0.98

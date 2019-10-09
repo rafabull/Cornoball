@@ -32,7 +32,7 @@ class Bat(pyglet.sprite.Sprite):
 
         #atribuindo algumas caracteristcas ao bastão
         self.shape.group = 1
-        self.shape.elasticity = 0.4
+        self.shape.elasticity = 0.9
         self.status = "NORMAL"
 
     def update(self, dt):

@@ -1,6 +1,8 @@
 import pymunk
 import pyglet
 import math
+import numpy
+
 
 class Circulo:
     def __init__(self, x, y, r):
@@ -10,6 +12,7 @@ class Circulo:
         self.circulo.color = (255, 0, 0, 255)
         self.circulo.elasticity = 0.98
         self.circulo.friction = 0.6
+
 
 class Triangulo1:
     def __init__(self, x, y, a):
@@ -29,16 +32,23 @@ class Triangulo2:
         self.triangulo2.elasticity = 0.98
         self.triangulo2.friction = 0.6
 
-class Trigira:
-    def __init__(self, x, y, l):
+
+class Trigira(pyglet.sprite.Sprite):
+    def __init__(self, x, y, l, *args, **kwargs):
+        super(Trigira, self).__init__(*args, **kwargs)
         self.trigira = pymunk.Poly(None, ((-l*math.sqrt(3)/3, 0),(l*math.sqrt(3)/6,-l/2),(l*math.sqrt(3)/6,l/2)))
         self.trigira_moment = pymunk.moment_for_poly(10,self.trigira.get_vertices())
-        self.trigira_body = pymunk.Body(10 ,self.trigira_moment, pymunk.Body.DYNAMIC)
+        self.trigira_body = pymunk.Body(10, self.trigira_moment, pymunk.Body.DYNAMIC)
         self.trigira.body = self.trigira_body
+        self.x = x
+        self.y = y
         self.trigira_body.position = x, y
         self.trigira.color = (255, 0, 0, 255)
         self.trigira.elasticity = 0.5
         self.trigira.friction = 0.6
-        self.pino = pymunk.Body(body_type= pymunk.Body.STATIC)
+        self.pino = pymunk.Body(body_type=pymunk.Body.STATIC)
         self.pino.position = self.trigira_body.position
         self.j = pymunk.PivotJoint(self.pino, self.trigira_body, (0,0), (0,0))
+
+    def update(self, dt):
+        self.rotation = numpy.rad2deg(self.trigira_body.angle)

@@ -101,6 +101,8 @@ class Game:
 
         self.Criaremov()
 
+        self.physicalObjects.extend([self.Trigira_0, self.Trigira_1, self.Trigira_2, self.Trigira_3])
+
         #Criando os bastoes
         aux = func.ancorar(pyglet.image.load('resources/images/bastao1.png'), 'esq')
         self.batE = bat.Bat(-1, aux, xE, yE)
@@ -138,10 +140,11 @@ class Game:
         self.status = 'BEGINING'
 
     def Criaremov (self):
-        self.Trigira_0 = obstaculos.Trigira(150, 300, 30)
-        self.Trigira_1 = obstaculos.Trigira(190, 360, 30)
-        self.Trigira_2 = obstaculos.Trigira(160, 400, 30)
-        self.Trigira_3 = obstaculos.Trigira(140, 450, 30)
+        aux = func.ancorar(pyglet.image.load('resources/images/trigira.png'), 'center')
+        self.Trigira_0 = obstaculos.Trigira(150, 300, 30, aux)
+        self.Trigira_1 = obstaculos.Trigira(190, 360, 30, aux)
+        self.Trigira_2 = obstaculos.Trigira(160, 400, 30, aux)
+        self.Trigira_3 = obstaculos.Trigira(140, 450, 30, aux)
         self.space.add(self.Trigira_0.trigira, self.Trigira_0.trigira_body,
                        self.Trigira_1.trigira, self.Trigira_1.trigira_body,
                        self.Trigira_2.trigira, self.Trigira_2.trigira_body,
@@ -155,6 +158,7 @@ class Game:
         aux = func.ancorar(pyglet.image.load('resources/images/bola.png'), 'center')
         self.ball = ball.Bola(self.mass, self.radius, xB, yB, collision_types, aux)
         self.space.add(self.ball.circle_body, self.ball.circle_shape)
+
         self.removiveis = [self.Trigira_0.trigira, self.Trigira_0.trigira_body,
                        self.Trigira_1.trigira, self.Trigira_1.trigira_body,
                        self.Trigira_2.trigira, self.Trigira_2.trigira_body,
@@ -199,16 +203,9 @@ class Game:
                 self.status = 'GAME OVER'
             else:
                 self.time += dt
-
                 self.ball.update(dt)
-
-                self.batE.update(dt)
-                self.batD.update(dt)
-
-
-        elif self.status == "BEGINING":
-            self.batE.update(dt)
-            self.batD.update(dt)
+                for obj in self.physicalObjects:
+                    obj.update(dt)
 
 
 

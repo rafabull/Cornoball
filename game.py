@@ -23,10 +23,12 @@ yD = 50
 collision_types = {
     "ball": 1,
     "mola": 2,
-    "Parede": 3
+    "Parede": 3,
+    "objects": 4
 }
 
 class Game:
+    pontos = 0
     #defnindo variaveis do pymunk
     space = pymunk.Space()
     space.gravity = (0.0, -500) # -500 é toop
@@ -86,17 +88,17 @@ class Game:
     #iniciando os elementos do jogo
     def __init__(self):
          #adicionando as formas(obstaculos)
-        self.Circulo_0 = obstaculos.Circulo(385,583, 39)
-        self.Circulo_1 = obstaculos.Circulo(257,302, 39)
+        self.Circulo_0 = obstaculos.Circulo(385,583, 39, collision_types)
+        self.Circulo_1 = obstaculos.Circulo(257,302, 39, collision_types)
         self.space.add(self.Circulo_0.circulo, self.Circulo_1.circulo)
 
-        self.Triangulo1_0 = obstaculos.Triangulo1(270, 444, 42)
-        self.Triangulo1_1 = obstaculos.Triangulo1(181, 560, 42)
-        self.Triangulo1_2 = obstaculos.Triangulo1(413, 385, 42)
+        self.Triangulo1_0 = obstaculos.Triangulo1(270, 444, 42, collision_types)
+        self.Triangulo1_1 = obstaculos.Triangulo1(181, 560, 42, collision_types)
+        self.Triangulo1_2 = obstaculos.Triangulo1(413, 385, 42, collision_types)
         self.space.add(self.Triangulo1_0.triangulo1, self.Triangulo1_1.triangulo1, self.Triangulo1_2.triangulo1)
 
-        self.Triangulo2_0 = obstaculos.Triangulo2(210, 121, 40, 90, -40)
-        self.Triangulo2_1 = obstaculos.Triangulo2(385, 121, -40, 90, 40)
+        self.Triangulo2_0 = obstaculos.Triangulo2(210, 121, 40, 90, -40, collision_types)
+        self.Triangulo2_1 = obstaculos.Triangulo2(385, 121, -40, 90, 40, collision_types)
         self.space.add(self.Triangulo2_0.triangulo2, self.Triangulo2_1.triangulo2)
 
         self.Criaremov()
@@ -134,6 +136,16 @@ class Game:
             collision_types["mola"],
             collision_types["ball"])
         h.begin = self.iniciando
+        
+        hobj = self.space.add_collision_handler(
+            collision_types["ball"],
+            collision_types["objects"]
+        )
+        hobj.post_solve = self.col_post
+        
+    def col_post (self, arbiter, space, data):
+        self.pontos += 10
+        print(self.pontos)
 
     def iniciando(self, arbiter, space, data):
         self.status = 'BEGINING'
@@ -142,10 +154,10 @@ class Game:
 
     def Criaremov (self):
         aux = func.ancorar(pyglet.image.load('resources/images/trigira.png'), 'center')
-        self.Trigira_0 = obstaculos.Trigira(150, 300, 30, aux)
-        self.Trigira_1 = obstaculos.Trigira(190, 360, 30, aux)
-        self.Trigira_2 = obstaculos.Trigira(160, 400, 30, aux)
-        self.Trigira_3 = obstaculos.Trigira(140, 450, 30, aux)
+        self.Trigira_0 = obstaculos.Trigira(150, 300, 30, collision_types, aux)
+        self.Trigira_1 = obstaculos.Trigira(190, 360, 30, collision_types, aux)
+        self.Trigira_2 = obstaculos.Trigira(160, 400, 30, collision_types, aux)
+        self.Trigira_3 = obstaculos.Trigira(140, 450, 30, collision_types, aux)
         self.space.add(self.Trigira_0.trigira, self.Trigira_0.trigira_body,
                        self.Trigira_1.trigira, self.Trigira_1.trigira_body,
                        self.Trigira_2.trigira, self.Trigira_2.trigira_body,

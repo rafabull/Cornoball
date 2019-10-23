@@ -26,7 +26,7 @@ def on_draw():
     game.draw()
 
     #exibindo na tela os elementos da fisica (pymunk)
-    game.space.debug_draw(pymunk.pyglet_util.DrawOptions())
+    #game.space.debug_draw(pymunk.pyglet_util.DrawOptions())
 
 #funcao para detectar teclas pressionadas
 @window.event

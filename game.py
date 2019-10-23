@@ -133,11 +133,12 @@ class Game:
         h = self.space.add_collision_handler(
             collision_types["mola"],
             collision_types["ball"])
-        h.separate = self.iniciando
-
+        h.begin = self.iniciando
 
     def iniciando(self, arbiter, space, data):
         self.status = 'BEGINING'
+        print(self.status)
+        return True
 
     def Criaremov (self):
         aux = func.ancorar(pyglet.image.load('resources/images/trigira.png'), 'center')
@@ -178,9 +179,7 @@ class Game:
             if self.charge_time > 1:
                 self.charge_time = 1
             self.ball.go(self.charge_time)
-            print("play")
-            self.status = "PLAYNG"
-            print(self.status)
+            self.status = "PLAYING"
 
     #desenhando na tela os elementos do jogo
     def draw(self):

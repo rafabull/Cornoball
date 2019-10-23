@@ -28,3 +28,4 @@ class Bola(pyglet.sprite.Sprite):
     def go(self, apertao):
         self.circle_body.apply_impulse_at_local_point(Vec2d.unit() * 1500 * apertao, (0, 0))
 
+

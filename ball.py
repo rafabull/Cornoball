@@ -14,8 +14,8 @@ class Bola(pyglet.sprite.Sprite):
         self.circle_body = pymunk.Body(mass, self.circle_moment)
         self.circle_body.position = xB, yB
         self.circle_shape = pymunk.Circle(self.circle_body, radius)
-        self.circle_shape.elasticity = 0.9
-        self.circle_shape.friction = 0.9
+        self.circle_shape.elasticity = 0.8
+        self.circle_shape.friction = 0.8
         self.circle_shape.collision_type = tipoColisao["ball"]
 
 

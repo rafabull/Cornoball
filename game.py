@@ -15,10 +15,10 @@ xB = 505    #505
 yB = 55     #55
 
 #Bastoes
-xE = 220
-yE = 50
-xD = 375
-yD = 50
+xE = 222
+yE = 49
+xD = 372
+yD = 49
 
 collision_types = {
     "ball": 1,
@@ -71,7 +71,7 @@ class Game:
 
                pymunk.Segment(space.static_body, (90, 500), (100, 400), 1.0),  #lado esquerdo
                pymunk.Segment(space.static_body, (100, 400), (130, 200), 1.0),
-               pymunk.Segment(space.static_body, (130, 200), (212, 60), 1.0),
+               pymunk.Segment(space.static_body, (130, 200), (214, 60), 1.0),
 
                pymunk.Segment(space.static_body, (380, 60), (460, 200), 1.0),  #lado direito
                pymunk.Segment(space.static_body, (460, 200), (495, 400), 1.0),
@@ -102,8 +102,6 @@ class Game:
         self.space.add(self.Triangulo2_0.triangulo2, self.Triangulo2_1.triangulo2)
 
         self.Criaremov()
-
-        self.physicalObjects.extend([self.Trigira_0, self.Trigira_1, self.Trigira_2, self.Trigira_3])
 
         #Criando os bastoes
         aux = func.ancorar(pyglet.image.load('resources/images/bastao1.png'), 'esq')
@@ -179,8 +177,15 @@ class Game:
                        self.Trigira_0.j, self.Trigira_1.j, self.Trigira_2.j, self.Trigira_3.j,
                        self.ball.circle_body, self.ball.circle_shape]
 
+        self.physicalObjects.extend([self.Trigira_0, self.Trigira_1, self.Trigira_2, self.Trigira_3])
+
     def reset(self):
         self.space.remove(self.removiveis)
+        self.physicalObjects.remove(self.Trigira_0)
+        self.physicalObjects.remove(self.Trigira_1)
+        self.physicalObjects.remove(self.Trigira_2)
+        self.physicalObjects.remove(self.Trigira_3)
+
         self.Criaremov()
 
         self.status = "BEGINING"
@@ -203,6 +208,12 @@ class Game:
             self.ball.draw()
             for obj in self.physicalObjects:
                 obj.draw()
+            pontos = pyglet.text.Label(str(self.pontos),
+                                       font_name='Arial',
+                                       font_size=16,
+                                       x=570, y=600,
+                                       color=(255, 100, 0, 255))
+            pontos.draw()
 
     #verificando status do jogo e mudando pos da bola
     def update(self, dt):

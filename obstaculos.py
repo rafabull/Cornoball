@@ -55,4 +55,5 @@ class Trigira(pyglet.sprite.Sprite):
         self.j = pymunk.PivotJoint(self.pino, self.trigira_body, (0,0), (0,0))
 
     def update(self, dt):
-        self.rotation = -numpy.rad2deg(self.trigira_body.angle)
+        self.rotation = numpy.rad2deg(self.trigira_body.angle)*(-1)
+

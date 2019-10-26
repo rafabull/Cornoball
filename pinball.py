@@ -44,6 +44,10 @@ def on_key_press(symbol, modifiers):
         if symbol == key.ENTER:
             game.reset()
 
+    if game.status == "REINICIAR":
+        if symbol == key.ENTER:
+            game.reset()
+
 @window.event
 def on_key_release(symbol, modifiers):
     if symbol == key.LEFT:

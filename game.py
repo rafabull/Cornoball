@@ -29,6 +29,7 @@ collision_types = {
 
 class Game:
     pontos = 0
+    vidas = 5
     #defnindo variaveis do pymunk
     space = pymunk.Space()
     space.gravity = (0.0, -500) # -500 é toop
@@ -204,6 +205,21 @@ class Game:
         if self.status == 'GAME OVER':
             self.gameOver.draw()
 
+        elif self.status == 'REINICIAR':
+            self.gameOver.draw()
+            fim = pyglet.text.Label(str("A pontuacao final e: "),
+                                       font_name='Arial',
+                                       font_size=20,
+                                       x = self.windowHeight/2, y = self.windowWidth/2 + 30,
+                                       color=(255, 100, 0, 255))
+            pontosf = pyglet.text.Label(str(self.pontos),
+                                       font_name='Arial',
+                                       font_size=20,
+                                       x = self.windowHeight/2, y = self.windowWidth/2,
+                                       color=(255, 100, 0, 255))
+            pontosf.draw()
+            fim.draw()
+
         elif self.status == 'PLAYING' or self.status == 'BEGINING':
             self.ball.draw()
             for obj in self.physicalObjects:
@@ -214,6 +230,13 @@ class Game:
                                        x=570, y=600,
                                        color=(255, 100, 0, 255))
             pontos.draw()
+            vidas = pyglet.text.Label(str(self.vidas),
+                                       font_name='Arial',
+                                       font_size=16,
+                                       x=570, y=520,
+                                       color=(255, 100, 0, 255))
+            vidas.draw()
+
 
     #verificando status do jogo e mudando pos da bola
     def update(self, dt):
@@ -223,6 +246,12 @@ class Game:
         if self.status == "PLAYING" or self.status == "BEGINING":
             if self.ball.y < 0:
                 self.status = 'GAME OVER'
+                self.vidas = self.vidas - 1
+                if self.vidas <= 0:
+                    self.status = 'REINICIAR'
+                    self.pontos = 0
+                    self.vidas = 5
+
             else:
                 self.time += dt
                 self.ball.update(dt)

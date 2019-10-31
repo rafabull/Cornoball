@@ -29,7 +29,7 @@ collision_types = {
 
 class Game:
     pontos = 0
-    vidas = 5
+    vidas = 2
     #defnindo variaveis do pymunk
     space = pymunk.Space()
     space.gravity = (0.0, -500) # -500 é toop
@@ -249,8 +249,7 @@ class Game:
                 self.vidas = self.vidas - 1
                 if self.vidas <= 0:
                     self.status = 'REINICIAR'
-                    self.pontos = 0
-                    self.vidas = 5
+
 
             else:
                 self.time += dt

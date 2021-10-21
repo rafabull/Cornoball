@@ -6,6 +6,7 @@ import numpy
 
 class Circulo:
     def __init__(self, x, y, r, tipoColisao):
+        self.circulo = []
         self.circulo_body = pymunk.Body(body_type=pymunk.Body.STATIC)
         self.circulo = pymunk.Circle(self.circulo_body, r)
         self.circulo.body.position = x,y

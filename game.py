@@ -91,15 +91,18 @@ class Game:
          #adicionando as formas(obstaculos)
         self.Circulo_0 = obstaculos.Circulo(385,583, 39, collision_types)
         self.Circulo_1 = obstaculos.Circulo(257,302, 39, collision_types)
+        self.space.add(self.Circulo_0.circulo_body, self.Circulo_1.circulo_body)
         self.space.add(self.Circulo_0.circulo, self.Circulo_1.circulo)
 
         self.Triangulo1_0 = obstaculos.Triangulo1(270, 444, 42, collision_types)
         self.Triangulo1_1 = obstaculos.Triangulo1(181, 560, 42, collision_types)
         self.Triangulo1_2 = obstaculos.Triangulo1(413, 385, 42, collision_types)
+        self.space.add(self.Triangulo1_0.triangulo1_body, self.Triangulo1_1.triangulo1_body, self.Triangulo1_2.triangulo1_body)
         self.space.add(self.Triangulo1_0.triangulo1, self.Triangulo1_1.triangulo1, self.Triangulo1_2.triangulo1)
 
         self.Triangulo2_0 = obstaculos.Triangulo2(210, 121, 40, 90, -40, collision_types)
         self.Triangulo2_1 = obstaculos.Triangulo2(385, 121, -40, 90, 40, collision_types)
+        self.space.add(self.Triangulo2_0.triangulo2_body, self.Triangulo2_1.triangulo2_body)
         self.space.add(self.Triangulo2_0.triangulo2, self.Triangulo2_1.triangulo2)
 
         self.Criaremov()
@@ -127,7 +130,7 @@ class Game:
                 line.elasticity = 0
             else:
                 line.collision_type = collision_types["Parede"]
-        self.space.add(self.borders)
+            self.space.add(line)
 
         self.status = 'BEGINING'
 
